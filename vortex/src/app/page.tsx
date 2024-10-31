@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "@/app/components/navbar";
+import Footer from "@/app/components/footer";
 
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
       <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 p-14">
         <h1 className="text-4xl text-center italic">Sobre a VORTEX</h1>
         <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 lg:flex-row lg:gap-52">
-        <div className="text-center max-w-80 flex flex-col gap-4">
+        <div className="text-center max-w-full flex flex-col gap-4">
           <p>
             Com o avanço das tecnologias de automação e inteligência artificial, chatbots
             têm otimizado processos em diversos setores, incluindo a gestão de recursos humanos.
@@ -64,6 +65,7 @@ export default function Home() {
           </li>
         </ul>
       </div>
+      <Footer />
     </>
   );
 }

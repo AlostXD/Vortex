@@ -1,10 +1,10 @@
-
+import Navbar from "@/app/components/navbar";
 
 
 export default function BatePonto() {
     return (
-        <div>
-            <h1>Bate Ponto</h1>
-        </div>
+        <>
+            <Navbar />
+        </>
     )
 }
