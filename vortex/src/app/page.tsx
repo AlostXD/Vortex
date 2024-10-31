@@ -8,6 +8,7 @@ export default function Home() {
       <Navbar />
       <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 p-14">
         <h1 className="text-4xl text-center italic">Sobre a VORTEX</h1>
+        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 lg:flex-row lg:gap-52">
         <div className="text-center max-w-80 flex flex-col gap-4">
           <p>
             Com o avanço das tecnologias de automação e inteligência artificial, chatbots
@@ -27,6 +28,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center">
           <Image src="/vortex.svg" alt="Vortex" width={300} height={300} />
           <h1 className="italic text-6xl">VORTEX</h1>
+        </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center mx-auto max-w-screen-lg h-auto gap-4 p-14">
