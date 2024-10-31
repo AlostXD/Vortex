@@ -8,8 +8,8 @@ export default function Footer() {
             <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 p-4 text-center list-none md:flex-row md:items-start">
                 <li className="p-3 flex flex-col gap-2">
                     <h3 className="font-extrabold text-2xl">Suporte</h3>
-                    <p className="italic">Email: <a href="mailto:vortexhelp@gmail.com">vortexhelp@gmail.com</a></p>
-                    <p className="italic">Celular: <a href="+99 (34) 9 9999-9999"></a></p>
+                    <p className="italic">Email: <a href="mailto:vortexhelp@gmail.com" className="underline underline-offset-1">vortexhelp@gmail.com</a></p>
+                    <p className="italic">Celular: <a href="">+99 (34) 9 9999-9999</a></p>
                 </li>
                 <li className="p-3 flex flex-col gap-2">
                     <h3 className="font-extrabold text-2xl">Equipe</h3>
