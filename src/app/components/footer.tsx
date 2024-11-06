@@ -4,7 +4,7 @@
 export default function Footer() {
     return (
         <>
-        <footer className="bg-white dark:bg-neutral-900 text-black dark:text-white">
+        <footer className="border-t-2 borber-b-black dark:border-b-white bg-white dark:bg-neutral-900 text-black dark:text-white">
             <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center gap-4 p-4 text-center list-none md:flex-row md:items-start">
                 <li className="p-3 flex flex-col gap-2">
                     <h3 className="font-extrabold text-2xl">Suporte</h3>
