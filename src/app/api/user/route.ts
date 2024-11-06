@@ -2,10 +2,14 @@ import { db } from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
+export async function GET() {
+    return NextResponse.json({ message: "Rota de API funcionando!" });
+}
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
+    console.log("Rota API chamada");
     try {
-        const body = await req.json();
+        const body = await request.json();
         const {email, password, username} = body;
 
 
@@ -28,7 +32,7 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = await db.user.create({
+        const user = await db.user.create({
             data: {
                 email,
                 password: hashedPassword,
@@ -37,8 +41,9 @@ export async function POST(req: Request) {
         });
         
 
-        return NextResponse.json({ user: newUser, message:"Usuário cadastrado com sucesso"}, {status: 201});
+        return NextResponse.json(user, { status: 201 });
     } catch(error) {
-
+        console.error('Erro ao criar usuário:', error);
+        return NextResponse.json({ error: 'Erro ao criar usuário' }, { status: 500 });
     }
 }
