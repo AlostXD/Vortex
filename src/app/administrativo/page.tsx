@@ -13,9 +13,11 @@ export default function Controle() {
         const fetchUsers = async () => {
             try {
                 const response = await fetch('/api/user/getUsers');
+                console.log('Resposta:', response);
                 if (response.ok) {
                     const data = await response.json();
                     setUsers(data); // Atualiza o estado com os dados dos usuários
+                    console.log('Dados dos usuários:', data);
                 } else {
                     console.error("Erro ao buscar usuários");
                 }
