@@ -18,7 +18,7 @@ export default function Footer() {
                     <h4 className="font-bold">Equipe de Desenvolvimento</h4>
                     <p className="italic">Ketley Souza</p>
                     <p className="italic">Maria Eduarda</p>
-                    <p className="italic">João Cunha</p>
+                    <p className="italic">João Paulo</p>
                     <p className="italic">Gabriel Guimarães</p>
                 </li>
                 <li className="p-3 flex flex-col gap-2">
@@ -28,6 +28,7 @@ export default function Footer() {
                     <p className="italic">Next.js</p>
                     <p className="italic">VS Code</p>
                     <p className="italic">PostgreSQL</p>
+                    <p className="italic">Prisma</p>
                     <p className="italic">Express.js</p>
                 </li>
             </div>
