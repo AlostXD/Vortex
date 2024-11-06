@@ -19,7 +19,6 @@ model User {
   id Int @id @default(autoincrement())
   user_id String
   user_discord_name String
-  createdAt DateTime @default(now())
   entrada DateTime
   saida DateTime?
   total String?
