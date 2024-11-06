@@ -5,9 +5,10 @@ export async function GET() {
     try {
         const users = await db.user.findMany();
         return NextResponse.json(users, { status: 200 });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Erro ao buscar usuários:', error);
-        return NextResponse.json({ error: 'Erro ao buscar usuários' }, { status: 500 });
+        // Adiciona mais detalhes sobre o erro
+        return NextResponse.json({ error: error.message || 'Erro ao buscar usuários' }, { status: 500 });
     }
 }
 
