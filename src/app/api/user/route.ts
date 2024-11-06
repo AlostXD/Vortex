@@ -1,3 +1,6 @@
+/*
+
+
 import { db } from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
@@ -10,21 +13,7 @@ export async function POST(request: Request) {
     console.log("Rota API chamada");
     try {
         const body = await request.json();
-        const {email, password, username} = body;
-
-
-        const existingUserByEmail = await db.user.findUnique({
-            where: { email: email }
-        });
-        if(existingUserByEmail){
-            return NextResponse.json({ user: null, message:"Email já cadastrado"}, {status: 409});
-        }
-
-        //check if username already exists
-
-        const existingUserByName = await db.user.findUnique({
-            where: { username: username }
-        });
+        const {username, password, email} = body;
         if(existingUserByName){
             return NextResponse.json({ user: null, message:"Usuário já cadastrado"}, {status: 409});
         }
@@ -36,7 +25,8 @@ export async function POST(request: Request) {
             data: {
                 email,
                 password: hashedPassword,
-                username
+                username,
+                total: "0" // Add the total property with a default value
             }
         });
         
@@ -47,3 +37,6 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Erro ao criar usuário' }, { status: 500 });
     }
 }
+
+
+*/
