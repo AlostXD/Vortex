@@ -38,7 +38,7 @@ export default function Controle() {
     return (
         <>
             <Navbar />
-            <div className="bg-white text-black dark:bg-neutral-800 dark:text-white flex flex-col md:flex-row h-screen">
+            <div className="bg-white text-black dark:bg-neutral-800 dark:text-white flex flex-col md:flex-row md:h-screen">
                 <div className="flex flex-col gap-12 items-center left-0 p-20 justify-center">
                     <Image src="/vortex.svg" alt="Bate Ponto" width={150} height={150} className="rounded-full" />
                     <h2 className="font-extrabold text-xl italic">Vortex</h2>
