@@ -6,35 +6,6 @@ import Footer from "@/app/components/footer"
 import Image from "next/image"
 
 export default function Controle() {
-    const [users, setUsers] = useState<any[]>([]);
-    const [selectedUser, setSelectedUser] = useState("");
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch('/api/user/getUsers');
-                console.log('Resposta:', response);
-                if (response.ok) {
-                    const data = await response.json();
-                    setUsers(data); // Atualiza o estado com os dados dos usuários
-                    console.log('Dados dos usuários:', data);
-                } else {
-                    console.error("Erro ao buscar usuários");
-                }
-            } catch (error) {
-                console.error("Erro ao buscar usuários:", error);
-            }
-        };
-
-        fetchUsers();
-    }, []);
-
-    const handleUserChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedUser(event.target.value);
-    };
-
-    const selectedUserData = users.find((user: any) => user.user_discord_name === selectedUser);
-
     return (
         <>
             <Navbar />
@@ -43,14 +14,6 @@ export default function Controle() {
                     <Image src="/vortex.svg" alt="Bate Ponto" width={150} height={150} className="rounded-full" />
                     <h2 className="font-extrabold text-xl italic">Vortex</h2>
                     <div className="relative">
-                        <select className="appearance-none bg-gray-500 dark:bg-neutral-300 dark:text-black p-2 rounded-xl hover:cursor-pointer transition-all ease-in-out hover:bg-white hover:text-black hover:border-2 hover:border-black hover:p-[-5px]" onChange={handleUserChange}>
-                            <option value="">Selecione o funcionário</option>
-                            {users.map((user: any) => (
-                                <option key={user.id} className="border p-2 mb-2 rounded">
-                                    {user.user_discord_name}
-                                </option>
-                            ))}
-                        </select>
                     </div>
                     {/*<a className="bg-gray-500 p-2 rounded-xl transition-all ease-in-out hover:bg-white hover:border-solid hover:border-2 hover:border-black hover:text-black hover:cursor-pointer">Trocar de conta</a>*/}
                 </div>
@@ -59,41 +22,21 @@ export default function Controle() {
                     <div>
                         <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Nome</p>
                         <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.user_discord_name}
-                                </li>
-                            )}
                         </ul>
                     </div>
                     <div>
                         <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Entrada</p>
                         <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.entrada}
-                                </li>
-                            )}
                         </ul>
                     </div>
                     <div>
                         <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Saída</p>
                         <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.saida}
-                                </li>
-                            )}
                         </ul>
                     </div>
                     <div>
                         <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Total</p>
                         <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.total}
-                                </li>
-                            )}
                         </ul>
                     </div>
                 </div>
