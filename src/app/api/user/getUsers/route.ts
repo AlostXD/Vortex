@@ -3,11 +3,31 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const users = await db.user.findMany();
-        return NextResponse.json(users, { status: 200 });
+        // Obtém todos os usuários e agrupa entradas pelo nome
+        const users = await db.user.groupBy({
+            by: ['user_discord_name'],
+            _min: {
+                entrada: true,
+            },
+            _max: {
+                saida: true,
+            },
+        });
+
+        // Mapeia para incluir uma lista de registros detalhados
+        const groupedUsers = await Promise.all(users.map(async user => {
+            const registros = await db.user.findMany({
+                where: { user_discord_name: user.user_discord_name },
+            });
+            return {
+                user_discord_name: user.user_discord_name,
+                registros,
+            };
+        }));
+
+        return NextResponse.json(groupedUsers, { status: 200 });
     } catch (error: any) {
         console.error('Erro ao buscar usuários:', error);
-        // Adiciona mais detalhes sobre o erro
         return NextResponse.json({ error: error.message || 'Erro ao buscar usuários' }, { status: 500 });
     }
 }

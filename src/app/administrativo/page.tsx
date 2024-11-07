@@ -13,11 +13,9 @@ export default function Controle() {
         const fetchUsers = async () => {
             try {
                 const response = await fetch('/api/user/getUsers');
-                console.log('Resposta:', response);
                 if (response.ok) {
                     const data = await response.json();
-                    setUsers(data); // Atualiza o estado com os dados dos usuários
-                    console.log('Dados dos usuários:', data);
+                    setUsers(data);
                 } else {
                     console.error("Erro ao buscar usuários");
                 }
@@ -33,6 +31,7 @@ export default function Controle() {
         setSelectedUser(event.target.value);
     };
 
+    // Filtra o usuário selecionado e exibe todos os registros de bate-ponto
     const selectedUserData = users.find((user: any) => user.user_discord_name === selectedUser);
 
     return (
@@ -43,57 +42,47 @@ export default function Controle() {
                     <Image src="/vortex.svg" alt="Bate Ponto" width={150} height={150} className="rounded-full" />
                     <h2 className="font-extrabold text-xl italic">Vortex</h2>
                     <div className="relative">
-                        <select className="appearance-none bg-gray-500 dark:bg-neutral-300 dark:text-black p-2 rounded-xl hover:cursor-pointer transition-all ease-in-out hover:bg-white hover:text-black hover:border-2 hover:border-black hover:p-[-5px]" onChange={handleUserChange}>
+                        <select className="appearance-none bg-gray-500 dark:bg-neutral-300 dark:text-black p-2 rounded-xl"
+                                onChange={handleUserChange}>
                             <option value="">Selecione o funcionário</option>
                             {users.map((user: any) => (
-                                <option key={user.id} className="border p-2 mb-2 rounded">
+                                <option key={user.user_discord_name} value={user.user_discord_name}>
                                     {user.user_discord_name}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    {/*<a className="bg-gray-500 p-2 rounded-xl transition-all ease-in-out hover:bg-white hover:border-solid hover:border-2 hover:border-black hover:text-black hover:cursor-pointer">Trocar de conta</a>*/}
                 </div>
-                <div className="w-full h-1 md:h-auto md:w-1 bg-black" ></div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-0 lg:grid-cols-4 w-full items-center justify-center gap-28 text-center p-4 h-full">
+                <div className="w-full h-1 md:h-auto md:w-1 bg-black dark:bg-white"></div>
+                <div className="grid grid-cols-1 sm:gap-0 md:grid-cols-3 w-full items-center justify-center gap-28 text-center p-4 h-full">
                     <div>
-                        <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Nome</p>
-                        <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.user_discord_name}
+                        <p className="border-y md:border-x border-black p-2 bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black font-extrabold">Registros de Entrada</p>
+                        <ul className='max-h-full text-black bg-neutral-900 dark:bg-neutral-500 dark:text-white'>
+                            {selectedUserData && selectedUserData.registros.map((registro: any, index: number) => (
+                                <li key={index} className="border-b md:border-x border-black">
+                                    {registro.entrada}
                                 </li>
-                            )}
+                            ))}
                         </ul>
                     </div>
                     <div>
-                        <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Entrada</p>
-                        <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.entrada}
+                        <p className="border-y md:border-x p-2 border-black bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black font-extrabold">Registros de Saída</p>
+                        <ul className='max-h-full text-black bg-neutral-900 dark:bg-neutral-500 dark:text-white'>
+                            {selectedUserData && selectedUserData.registros.map((registro: any, index: number) => (
+                                <li key={index} className="border-b md:border-x border-black">
+                                    {registro.saida || "N/A"}
                                 </li>
-                            )}
+                            ))}
                         </ul>
                     </div>
                     <div>
-                        <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Saída</p>
-                        <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.saida}
+                        <p className="border-y md:border-x p-2 border-black bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black font-extrabold">Total</p>
+                        <ul className='max-h-full text-black bg-neutral-900 dark:bg-neutral-500 dark:text-white'>
+                            {selectedUserData && selectedUserData.registros.map((registro: any, index: number) => (
+                                <li key={index} className="border-b md:border-x border-black">
+                                    {registro.total || "N/A"}
                                 </li>
-                            )}
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="border-y md:border-x p-2 bg-zinc-800 dark:bg-zinc-400 text-white dark:text-black">Total</p>
-                        <ul className='max-h-full text-white bg-neutral-900 dark:bg-neutral-500 dark:text-black'>
-                            {selectedUserData && (
-                                <li className="border-b md:border-x">
-                                    {selectedUserData.total}
-                                </li>
-                            )}
+                            ))}
                         </ul>
                     </div>
                 </div>
