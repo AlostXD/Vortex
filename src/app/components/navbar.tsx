@@ -11,11 +11,11 @@ export default function Navbar() {
                 </a>
                 <ul className="flex flex-col items-center gap-12 font-bold sm:flex-row sm:justify-between">
                     <li className="transition duration-500 ease-in-out hover:scale-x-105 hover:text-gray-700">
-                        <a href="./homepage">Home</a>
-                    </li >
+                        <a href="./">Home</a>
+                    </li >{/*
                     <li className="transition duration-500 ease-in-out hover:scale-x-105 hover:text-gray-700">
                         <a href="./bate-ponto">Bate-Ponto</a>
-                    </li>
+                    </li>*/}
                     <li className="transition duration-500 ease-in-out hover:scale-x-105 hover:text-gray-700">
                         <a href="./administrativo">Administrativo</a>
                     </li>
