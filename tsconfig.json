@@ -1,55 +1,27 @@
 {
   "compilerOptions": {
-    // Specify your target ECMAScript version
     "target": "ES2017",
-    // Specify the libraries to include
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    // Allow JavaScript files to be compiled
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    // Skip type checking of declaration files
     "skipLibCheck": true,
-    // Enable strict type checking
     "strict": true,
-    // Disable emitting output files
-    "noEmit": false,
-    // Enable interoperability between CommonJS and ES Modules
+    "noEmit": true,
     "esModuleInterop": true,
-    // Specify the module system
     "module": "esnext",
-    // Specify the module resolution strategy
-    "moduleResolution": "node",
-    // Enable importing JSON files as modules
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    // Enable incremental compilation
+    "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true,
-    // Specify any additional plugins
     "plugins": [
       {
         "name": "next"
       }
     ],
-    // Specify path aliases for module resolution
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
-    "isolatedModules": true,
-    "jsx": "preserve"
+      "@/*": ["./src/*"]
+    }
   },
-  // Specify the files to include in compilation
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  // Specify the files to exclude from compilation
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
