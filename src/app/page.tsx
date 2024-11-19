@@ -1,9 +1,6 @@
 import Image from "next/image";
-import SignInButton from "@/components/signin-button";
-import { SignOutButton } from "@/components/signout-button";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import UserAvatar from "@/components/userProfile";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 

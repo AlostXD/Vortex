@@ -16,8 +16,8 @@ export async function POST(req: NextRequest) {
         });
 
         return NextResponse.json(ponto, { status: 201 });
-    } catch (error: any) {
+    } catch (error) {
         console.error('Erro ao registrar ponto:', error);
-        return NextResponse.json({ error: error.message || 'Erro ao registrar ponto' }, { status: 500 });
+        return NextResponse.json({ error: (error as any).message || 'Erro ao registrar ponto' }, { status: 500 });
     }
 }
