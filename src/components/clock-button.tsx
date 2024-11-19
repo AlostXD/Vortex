@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 export default function ClockButton() {
@@ -8,8 +8,15 @@ export default function ClockButton() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [isClockedIn, setIsClockedIn] = useState(false);
 
-  const handleClockIn = async (event: React.FormEvent) => {
+  useEffect(() => {
+    // Lógica para verificar se o usuário já está "em serviço".
+    // Exemplo: poderia fazer uma chamada à API para verificar o status atual do usuário.
+    setIsClockedIn(false); // Inicializa como não "em serviço".
+  }, []);
+
+  const handleClock = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
@@ -21,45 +28,58 @@ export default function ClockButton() {
       return;
     }
 
-    try {
-      const response = await fetch('/api/clockin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+    const url = isClockedIn ? "/api/clockout" : "/api/clockin"; // Alterna entre entrada e saída
+    const body = isClockedIn
+      ? {
+          userdiscordemail: session.user.email, // ID ou email único do usuário
+          saida: new Date(),
+        }
+      : {
           userdiscordname: session.user.name, // Nome do usuário do GitHub
           userdiscordemail: session.user.email, // ID ou email único do usuário
-        }),
+        };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Ponto registrado com sucesso:", data);
+        console.log(isClockedIn ? "Serviço finalizado com sucesso:" : "Serviço iniciado com sucesso:", data);
         setSuccess(true);
+        setIsClockedIn(!isClockedIn); // Alterna o estado do botão
       } else {
         const errorData = await response.json();
-        console.error("Erro ao registrar ponto:", errorData.error);
-        setError(errorData.error || "Erro ao registrar ponto");
+        console.error(isClockedIn ? "Erro ao finalizar serviço:" : "Erro ao iniciar serviço:", errorData.error);
+        setError(errorData.error || "Erro ao processar o serviço");
       }
     } catch (err: any) {
-      console.error("Erro ao registrar ponto:", err);
-      setError("Erro inesperado ao registrar ponto");
+      console.error("Erro inesperado:", err);
+      setError("Erro inesperado ao processar o serviço.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleClockIn} className="flex flex-col items-center justify-center p-4">
+    <form onSubmit={handleClock} className="flex flex-col items-center justify-center p-4">
       <button
         type="submit"
-        className="p-2 bg-zinc-500 text-white rounded hover:bg-zinc-800 transition-all"
+        className={`p-2 rounded-xl transition-all ${
+          isClockedIn
+            ? "bg-red-500 hover:bg-red-600"
+            : "bg-green-500 hover:bg-green-600"
+        } text-white`}
         disabled={loading}
       >
-        {loading ? "Registrando..." : "Entrar em serviço"}
+        {loading ? "Processando..." : isClockedIn ? "Finalizar serviço" : "Entrar em serviço"}
       </button>
-      {success && <p className="text-green-500 mt-2">Ponto registrado com sucesso!</p>}
+      {success && <p className="text-green-500 mt-2">Operação realizada com sucesso!</p>}
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </form>
   );

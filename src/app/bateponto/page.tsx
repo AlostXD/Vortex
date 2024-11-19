@@ -9,8 +9,8 @@ export default function Bateponto() {
   return (
     <>
       <Navbar />
-      <div className="">
-        <div className="border-r-2 max-w-fit p-4 font-extrabold">
+      <div className="max-h-screen">
+        <div className="border-r-2 max-w-fit p-4 font-extrabold flex flex-col gap-12 items-center justify-center">
           <UserAvatar />
           <SessionProvider>
             <ClockButton />
