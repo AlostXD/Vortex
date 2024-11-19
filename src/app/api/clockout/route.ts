@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(ponto, { status: 200 });
-  } catch (error) {
+  } catch (error: Error | any) {
     console.error("Erro ao finalizar ponto:", error);
     return NextResponse.json(
       { error: (error as any).message || "Erro ao finalizar ponto" },

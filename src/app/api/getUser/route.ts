@@ -26,7 +26,7 @@ export async function GET() {
         }));
 
         return NextResponse.json(groupedUsers, { status: 200 });
-    } catch (error: any) {
+    } catch (error: Error | any) {
         console.error('Erro ao buscar usuários:', error);
         return NextResponse.json({ error: error.message || 'Erro ao buscar usuários' }, { status: 500 });
     }
