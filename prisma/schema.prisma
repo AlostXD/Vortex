@@ -82,3 +82,16 @@ model Authenticator {
  
   @@id([userId, credentialID])
 }
+
+model Pontos {
+  id Int @id @default(autoincrement())
+  nome String?
+  userdiscordid String?
+  userdiscordname String?
+  useremail String?
+  entrada DateTime @default(now())
+  saida DateTime?
+  total String?
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}

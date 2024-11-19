@@ -1,12 +1,10 @@
 import SignInButton from "@/components/signin-button";
 import React from "react";
 
-type Props = {};
-
-export default function Page({}: Props) {
+export default function Login() {
   return (
     <>
-        <div className=""></div>
+      <div className=""></div>
       <SignInButton />
     </>
   );
