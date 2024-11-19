@@ -58,7 +58,7 @@ export default function ClockButton() {
         console.error(isClockedIn ? "Erro ao finalizar serviço:" : "Erro ao iniciar serviço:", errorData.error);
         setError(errorData.error || "Erro ao processar o serviço");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Erro inesperado:", err);
       setError("Erro inesperado ao processar o serviço.");
     } finally {
