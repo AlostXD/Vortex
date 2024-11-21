@@ -5,6 +5,10 @@ export async function POST(req: NextRequest) {
   try {
     const { userdiscordemail, saida } = await req.json();
 
+    // Ajustar a data para UTC-3
+    const saidaDate = new Date(saida);
+    saidaDate.setHours(saidaDate.getHours() - 3);
+
     // Transformar o e-mail em letras minúsculas
     const lowercaseEmail = userdiscordemail.toLowerCase();
 
@@ -14,7 +18,7 @@ export async function POST(req: NextRequest) {
         userdiscordid: lowercaseEmail,
         saida: null, // Apenas registra saída para registros sem saída
       },
-      data: { saida: new Date(saida) },
+      data: { saida: saidaDate },
     });
 
     if (ponto.count === 0) {
@@ -28,7 +32,7 @@ export async function POST(req: NextRequest) {
     const registroAtualizado = await prisma.pontos.findFirst({
       where: {
         userdiscordid: lowercaseEmail,
-        saida: new Date(saida),
+        saida: saidaDate,
       },
     });
 
@@ -41,7 +45,6 @@ export async function POST(req: NextRequest) {
 
     // Calcular a diferença entre entrada e saída
     const entrada = new Date(registroAtualizado.entrada);
-    const saidaDate = new Date(registroAtualizado.saida!); // Saída não será mais nula
     const totalMilliseconds = saidaDate.getTime() - entrada.getTime();
 
     // Calcular horas, minutos e segundos
@@ -56,7 +59,7 @@ export async function POST(req: NextRequest) {
     const total = await prisma.pontos.updateMany({
       where: {
         userdiscordid: lowercaseEmail,
-        saida: new Date(saida),
+        saida: saidaDate,
       },
       data: { total: totalFormatted },
     });
