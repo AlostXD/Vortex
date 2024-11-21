@@ -95,7 +95,7 @@ export default function Controle() {
           <div className="overflow-x-auto">
             <div className="flex flex-col gap-4">
               {/* Cabeçalho */}
-              <div className="grid grid-cols-4 sm:grid-cols-4 gap-2 bg-gray-300 dark:bg-gray-700 text-center font-bold">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-gray-300 dark:bg-gray-700 text-center font-bold">
                 <div className="p-2 border border-gray-400 dark:border-gray-600">
                   Dia
                 </div>
@@ -115,7 +115,7 @@ export default function Controle() {
                 {selectedUserData.registros.map((registro, index) => (
                   <li
                     key={index}
-                    className={`grid grid-cols-4 sm:grid-cols-4 text-center odd:bg-gray-100 even:bg-white dark:odd:bg-gray-700 dark:even:bg-gray-800 gap-2`}
+                    className={`grid grid-cols-2 md:grid-cols-4 text-center odd:bg-gray-100 even:bg-white dark:odd:bg-gray-700 dark:even:bg-gray-800 gap-2`}
                   >
                     <div className="p-2 border border-gray-400 dark:border-gray-600">
                       {formatarDia(registro.entrada)}
