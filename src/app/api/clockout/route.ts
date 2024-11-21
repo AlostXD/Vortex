@@ -5,10 +5,13 @@ export async function POST(req: NextRequest) {
   try {
     const { userdiscordemail, saida } = await req.json();
 
+    // Transformar o e-mail em letras minúsculas
+    const lowercaseEmail = userdiscordemail.toLowerCase();
+
     // Atualizar o registro no banco de dados
     const ponto = await prisma.pontos.updateMany({
       where: {
-        userdiscordid: userdiscordemail,
+        userdiscordid: lowercaseEmail,
         saida: null, // Apenas registra saída para registros sem saída
       },
       data: { saida: new Date(saida) },
@@ -24,7 +27,7 @@ export async function POST(req: NextRequest) {
     // Recuperar o registro atualizado
     const registroAtualizado = await prisma.pontos.findFirst({
       where: {
-        userdiscordid: userdiscordemail,
+        userdiscordid: lowercaseEmail,
         saida: new Date(saida),
       },
     });
@@ -50,11 +53,10 @@ export async function POST(req: NextRequest) {
     // Formatar o tempo total como "X horas, X minutos e X segundos trabalhados"
     const totalFormatted = `${hours} horas, ${minutes} minutos e ${seconds} segundos trabalhados`;
 
-
     const total = await prisma.pontos.updateMany({
       where: {
-        userdiscordid: userdiscordemail,
-        saida: new Date(saida), // Apenas registra saída para registros sem saída
+        userdiscordid: lowercaseEmail,
+        saida: new Date(saida),
       },
       data: { total: totalFormatted },
     });
@@ -65,6 +67,7 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
+
     // Retornar os dados formatados
     return NextResponse.json(
       {
