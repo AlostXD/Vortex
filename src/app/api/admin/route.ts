@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+/*import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -11,4 +11,4 @@ export const GET = auth(async function GET(req: CustomNextRequest): Promise<Next
     return NextResponse.json(req.auth);
   }
   return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
-});
+});*/
