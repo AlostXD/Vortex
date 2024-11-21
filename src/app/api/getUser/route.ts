@@ -20,7 +20,7 @@ export async function GET() {
                 where: { userdiscordname: user.userdiscordname },
             });
             return {
-                userDiscordName: user.userdiscordname,
+                userdiscordname: user.userdiscordname,
                 registros,
             };
         }));

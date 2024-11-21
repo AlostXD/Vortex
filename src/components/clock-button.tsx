@@ -67,7 +67,7 @@ export default function ClockButton() {
   };
 
   return (
-    <form onSubmit={handleClock} className="flex flex-col items-center justify-center p-4">
+    <form onSubmit={handleClock} className="flex flex-col items-center justify-center p-4 font-extrabold">
       <button
         type="submit"
         className={`p-2 rounded-xl transition-all ${
