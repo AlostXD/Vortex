@@ -8,7 +8,7 @@ export function SignOutButton() {
         await signOut();
       }}
     >
-      <button type="submit">Sign Out</button>
+      <button type="submit">Trocar de conta / sair</button>
     </form>
   );
 }

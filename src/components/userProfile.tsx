@@ -19,6 +19,7 @@ export default async function UserAvatar() {
         />
         <h2 className="font-extrabold text-lg">{session.user.name}</h2>
         <h4 className="font-extrabold italic">{session.user.email}</h4>
+        <SignOutButton />
       </div>
     </>
   );
