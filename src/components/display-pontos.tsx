@@ -61,10 +61,10 @@ export default async function DisplayPontos() {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:gap-0 md:grid-cols-2 lg:grid-cols-4 w-full items-center justify-center gap-28 text-center p-4 h-fit">
+      <div className="grid grid-cols-1 sm:gap-0 md:grid-cols-2 lg:grid-cols-4 w-full items-center justify-center gap-28 text-center p-4 h-fit dark:text-white">
         <div>
           <p className="border-y md:border-x border-black p-2 bg-zinc-800 dark:bg-zinc-200 text-white dark:text-black font-extrabold">
-            Registros de Entrada
+            Registros de Dias
           </p>
           <ul className="max-h-full text-black bg-neutral-900 dark:bg-neutral-500 dark:text-white">
             {registrosFormatados.map((registro: any, idx: number) => (
